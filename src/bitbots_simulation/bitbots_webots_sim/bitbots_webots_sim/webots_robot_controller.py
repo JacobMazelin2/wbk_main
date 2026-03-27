@@ -3,7 +3,14 @@ import os
 import time
 from typing import Optional
 
-from controller import Robot
+from bitbots_webots_sim.webots_python_path import format_webots_controller_help, prepend_webots_controller_python_path
+
+prepend_webots_controller_python_path()
+
+try:
+    from controller import Robot
+except ModuleNotFoundError as e:
+    raise ModuleNotFoundError(format_webots_controller_help()) from e
 from geometry_msgs.msg import PointStamped
 from rclpy.node import Node as RclpyNode
 from rclpy.time import Time

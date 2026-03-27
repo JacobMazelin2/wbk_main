@@ -2,7 +2,15 @@ from typing import Optional
 
 import numpy as np
 import transforms3d
-from controller import Keyboard, Node, Supervisor
+
+from bitbots_webots_sim.webots_python_path import format_webots_controller_help, prepend_webots_controller_python_path
+
+prepend_webots_controller_python_path()
+
+try:
+    from controller import Keyboard, Node, Supervisor
+except ModuleNotFoundError as e:
+    raise ModuleNotFoundError(format_webots_controller_help()) from e
 from gazebo_msgs.msg import ModelStates
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist
 from rclpy.node import Node as RclpyNode
